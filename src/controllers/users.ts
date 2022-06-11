@@ -10,8 +10,6 @@ import {
   loginFailed
 } from '../views/json/users'
 import { validatePassword } from './users_handlers'
-import { sendEmail } from '../utils/emails/send'
-import { API_URL } from '../utils/config'
 import jwt from 'jsonwebtoken'
 import { USER_LANGUAGES } from '../domain'
 
@@ -48,26 +46,12 @@ router.post('/signup', async (req: Request<UserToSignup>, res: Response) => {
     accountStatusToken
   })
 
-  const template = `signup_confirmation_${language}.hbs`
   if (!language) {
     return res.status(422).json(languageUnspecified)
   } else if (!validatePassword(password)) {
     return res.status(422).json(passwordTooShort)
   } else {
-    // Successfully saved
-    const emailConfig = {
-      template,
-      email_recipient: email,
-      // name_recipient: '',
-      subject: 'Welcome. Please confirm your sign up'
-    }
-
-    const emailVars = {
-      signup_confirmation_url: `${API_URL}/users/signup/${accountStatusToken}`
-    }
-
-    return sendEmail(emailConfig, emailVars)
-      .then(() => user.save()
+    return user.save()
         .then((savedUser) => res.status(201).json({
           ...userRegistered,
           crud: {
@@ -77,7 +61,7 @@ router.post('/signup', async (req: Request<UserToSignup>, res: Response) => {
         }))
         .catch((error: Error) => {
           throw new Error(`Couldn't store on mongo. ${error}`)
-        }))
+        })
       .catch((error: Error) => res.status(400).send(`${error}`))
   }
 })

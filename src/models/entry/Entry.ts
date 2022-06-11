@@ -13,6 +13,9 @@ const entrySchema = new Schema<entryType>({
   field2: {
     type: Number
   },
+  field3: {
+    type: [Number]
+  },
   user: { // The id of the user that created the entry
     type: String,
     required: true

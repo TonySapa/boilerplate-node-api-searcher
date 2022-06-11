@@ -6,5 +6,6 @@
 export interface entryType {
   field1: string,
   field2?: number,
+  field3?: Array<number>
   user: string
 }

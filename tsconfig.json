@@ -11,5 +11,8 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true
-  }
+  },
+  "files": [
+    "./src/types/index.ts"
+  ]
 }

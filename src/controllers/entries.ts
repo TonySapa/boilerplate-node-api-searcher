@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import User from '../models/user/User'
 import EntryModel from '../models/entry/Entry'
@@ -12,6 +12,13 @@ declare module 'jsonwebtoken' {
   // eslint-disable-next-line no-unused-vars
   interface UserIDJwtPayload extends jwt.JwtPayload {
     email: string
+    token?: string
+  }
+}
+
+declare module 'express' { 
+  export interface Request {
+    token?: string
   }
 }
 
@@ -35,6 +42,39 @@ router.get('/', async (_req, res) => {
 })
 
 /******************************************************************************
+ * Gets entries where field2 falls between "min" and "max" values.
+ * @access token is NOT needed
+ * @returns a 200 with all entries.
+ *****************************************************************************/
+router.get('/range/:min/:max', async (req, res) => {
+  const { min, max } = req.params
+  const entries = await EntryModel
+    .find({
+      field2: { $gte:  min, $lte: max }
+    })
+    .populate('user', { username: 1, name: 1 })
+
+  res.json(entries)
+})
+
+/******************************************************************************
+ * Gets entries where field2 falls between "min" and "max" values. The field2
+ * in this case is an array of multiple values.
+ * @access token is NOT needed
+ * @returns a 200 with all entries.
+ *****************************************************************************/
+ router.get('/range/:min/:max', async (req, res) => {
+  const { min, max } = req.params
+  const entries = await EntryModel
+    .find({
+      field3: { $gte:  min, $lte: max }
+    })
+    .populate('user', { username: 1, name: 1 })
+
+  res.json(entries)
+})
+
+/******************************************************************************
  * Get a specific entry, found by id
  * @access a token is NOT needed
  * @param {string} id the id to match
@@ -44,7 +84,7 @@ router.get('/:id', async (req, res) => {
   const entry = await EntryModel.findById(req.params.id)
   entry
     ? res.status(200).json(entry)
-    : res.status(404).json({ error: 'No blog found with that id' })
+    : res.status(404).json({ error: 'No entry found with that id' })
 })
 
 /******************************************************************************
@@ -53,9 +93,9 @@ router.get('/:id', async (req, res) => {
  * @param {string} id the id to match
  * @returns a 204 with no content
  *****************************************************************************/
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', async (req: Request, res: Response) => {
   const decodedToken = <jwt.UserIDJwtPayload><unknown>
-    jwt.verify(req.token, `${process.env.SECRET}`)
+    jwt.verify(`${req.token}`, `${process.env.SECRET}`)
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const userId = decodedToken.id
@@ -105,10 +145,10 @@ router.put('/:id', async (req, res) => {
  * @param {entryType} entry
  * @returns a 201 with the new entry
  *****************************************************************************/
-router.post('/', (req, res, next) => {
+router.post('/', (req: Request, res: Response, next) => {
   // Verify authentication by decoding bearer token.
   return jwt.verify(
-    req.token,
+    `${req.token}`,
     `${process.env.SECRET}`,
     (error, decodedToken) => {
       if (error) {
