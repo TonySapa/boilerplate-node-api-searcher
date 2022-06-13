@@ -1,0 +1,9 @@
+GET http://localhost:3000/api/firms/all/0/barcelona/5/1-2
+
+// Expect 404
+// Expect error with:
+//{
+//  "message_code": 4041,
+//  "message_text": "No existen gestorías con estos parámetros.",
+//  "dev_tip": "Intenta de nuevo con menos filtros"
+//}

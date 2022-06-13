@@ -7,8 +7,8 @@ const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const logger_1 = require("./utils/logger");
 const authentication_1 = require("./middlewares/authentication");
+const firms_1 = __importDefault(require("./controllers/firms"));
 const users_1 = __importDefault(require("./controllers/users"));
-const emails_1 = __importDefault(require("./controllers/emails"));
 const entries_1 = __importDefault(require("./controllers/entries"));
 const express_handlebars_1 = require("express-handlebars");
 const error_handling_1 = require("./middlewares/error_handling");
@@ -25,7 +25,7 @@ app.get('/ping', (_req, res) => {
     (0, logger_1.info)('someone pinged here');
     res.send('pong');
 });
+app.use('/api/firms', firms_1.default, error_handling_1.errorHandler);
 app.use('/api/users', users_1.default);
-app.use('/api/emails', emails_1.default);
 app.use('/api/entries', entries_1.default, error_handling_1.errorHandler);
 exports.default = app;

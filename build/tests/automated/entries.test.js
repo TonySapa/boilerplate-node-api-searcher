@@ -15,8 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const supertest_1 = __importDefault(require("supertest"));
 const index_1 = __importDefault(require("../../src/index"));
-const Entry_1 = __importDefault(require("../../src/models/entry/Entry"));
-// import User from '../../models/user/User';
+const entry_1 = __importDefault(require("../../src/models/entry"));
+// import User from '../../models/user/User'
 const api = (0, supertest_1.default)(index_1.default);
 const newEntry = {
     field1: 'Hello World',
@@ -36,7 +36,7 @@ describe('Entries router.', () => {
      ***************************************************************************/
     describe('User can post new entries.', () => {
         test('User can post new entries.', () => __awaiter(void 0, void 0, void 0, function* () {
-            yield Entry_1.default.deleteMany({});
+            yield entry_1.default.deleteMany({});
             yield api
                 .post('/api/entries')
                 .set('Authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbmlzYW5jaGV6LmRldkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQwenJ1cmRZLkN4Z0c2THA5bS5IMkt1Q01Bb3lZZXFOcW9WaTE4NTlVYlFhSklMcWcvUGh3eSIsImlhdCI6MTY0NzUxNTA4M30.PgRStGQjArJMt0icw_yWYW_gYPqQ5Myf8EUowd8no28')
@@ -45,7 +45,7 @@ describe('Entries router.', () => {
                 .expect(201);
         }), 10000);
         test('Posting without token authentication returns 401 documented error.', () => __awaiter(void 0, void 0, void 0, function* () {
-            yield Entry_1.default.deleteMany({});
+            yield entry_1.default.deleteMany({});
             const wrongTokenEntry = yield api
                 .post('/api/entries')
                 .send(newEntry)
@@ -55,7 +55,7 @@ describe('Entries router.', () => {
             expect(wrongTokenEntry.body.message_text).toBe('Token is invalid or has expired');
         }), 10000);
         test('If user doesn\'t exist returns a documented response and don\'t save the entry', () => __awaiter(void 0, void 0, void 0, function* () {
-            yield Entry_1.default.deleteMany({});
+            yield entry_1.default.deleteMany({});
             const userDoesnExist = yield api
                 .post('/api/entries')
                 .set('Authorization', 'eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvbnlzYXBhOTBAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMHpydXJkWS5DeGdHNkxwOW0uSDJLdUNNQW95WWVxTnFvVmkxODU5VWJRYUpJTHFnL1Bod3kiLCJpYXQiOjE2NDc1MTUwODN9.U0KZVH8VA9ZCxXBcLuVrCbdDrWxhYp49RPAvVD-DRXc')
@@ -81,6 +81,7 @@ describe('Entries router.', () => {
         }), 10000);
     });
 });
-afterAll(() => {
+afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
+    yield entry_1.default.deleteMany({});
     void mongoose_1.default.connection.close();
-});
+}));

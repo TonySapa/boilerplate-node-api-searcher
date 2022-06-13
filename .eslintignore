@@ -5,3 +5,6 @@ _mock_
 _dev_notes
 _requests_demos
 _mailjet_demo
+tsconfig.json
+package.json
+jest.config.js

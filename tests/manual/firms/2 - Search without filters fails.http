@@ -1,0 +1,4 @@
+GET http://localhost:3000/api/firms/all
+Content-Type: application/json
+
+// Expect a 400 with message: "No se ha especificado parametro "from" para pagination."

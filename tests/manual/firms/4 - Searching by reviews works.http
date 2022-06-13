@@ -1,0 +1,5 @@
+GET http://localhost:3000/api/firms/all/0/barcelona/4/null
+
+// To test this endpoint first make sure a similar company exist, test number 1 can be used for this.
+// Expect 200 and an object containing a field "firms" with an array containing coincidences. Another field with length, representing the total length, without pagination. 
+// Expect only 2 companies to appear. Since only 2 have rating 4 and the third one rating 3. Another one is from Madrid, not Barcelona.
