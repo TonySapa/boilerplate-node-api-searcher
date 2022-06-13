@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import supertest from 'supertest'
 import index from '../../src/index'
-import EntryModel from '../../src/models/entry/Entry'
+import EntryModel from '../../src/models/entry'
 // import User from '../../models/user/User'
 
 const api = supertest(index)
@@ -76,6 +76,7 @@ describe('Entries router.', () => {
   })
 })
 
-afterAll(() => {
+afterAll(async() => {
+  await EntryModel.deleteMany({})
   void mongoose.connection.close()
 })

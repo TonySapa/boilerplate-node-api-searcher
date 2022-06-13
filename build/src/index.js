@@ -15,7 +15,13 @@ mongoose_1.default.connect(`${config_1.MONGODB_URI}`, { useNewUrlParser: true, u
     (0, logger_1.error)('error connection to MongoDB:', `${error.message}`);
 });
 const PORT = 3000;
-app_1.default.listen(PORT, () => {
-    (0, logger_1.info)(`Server running on port ${PORT}`);
-});
+/******************************************************************************
+ * Wrapping on this "if statement" allows jest/supertest to runInBand and not
+ * crash because of port already in use.
+ *****************************************************************************/
+if (process.env.NODE_ENV !== 'test') {
+    app_1.default.listen(PORT, () => {
+        (0, logger_1.info)(`Server running on port ${PORT}`);
+    });
+}
 exports.default = app_1.default;

@@ -1,0 +1,5 @@
+GET http://localhost:3000/api/firms/all/0/barcelona
+
+// Expect 200 and an object containing a field "firms" with an array containing coincidences. Another field with length, representing the total length, without pagination. 
+// Expect 3 firms to appear.
+// All 3 from Barcelona out of 4

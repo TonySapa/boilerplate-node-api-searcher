@@ -1,0 +1,15 @@
+POST http://localhost:3000/api/firms/add-firm
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbmlzYW5jaGV6LmRldkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRXZDgvRDRTT0JRckdnZU1tWEJHLjkuVEwuZGpqTmJObEFkbUJMcjNBOGVhMkVvbS5FTktEcSIsImlhdCI6MTY1NDkwMzk5OX0.ruF1UIUwIVtpBDBe1r06GFBdSXIgTGG1_nsDzDSwRpU
+
+{
+  "name": "Third Barcelona",
+  "region1_name": "barcelona",
+  "rating": 4,
+  "subscription_price_range_max": 150,
+  "subscription_price_range_min": 80
+}
+
+// Before testing use log in endpoint to get a new token.
+// Expect a 201 with the content of the new entry including the field "user" with the user id.
+// Expect country to be 'ES' if left "country" field empty.

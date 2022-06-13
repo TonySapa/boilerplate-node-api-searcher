@@ -16,8 +16,14 @@ mongoose.connect(
 
 const PORT = 3000
 
-app.listen(PORT, () => {
-  info(`Server running on port ${PORT}`)
-})
+/******************************************************************************
+ * Wrapping on this "if statement" allows jest/supertest to runInBand and not
+ * crash because of port already in use.
+ *****************************************************************************/
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    info(`Server running on port ${PORT}`)
+  })  
+}
 
 export default app
