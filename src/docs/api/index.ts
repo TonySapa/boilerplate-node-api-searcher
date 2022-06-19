@@ -1,9 +1,10 @@
 import { JsonObject } from 'swagger-ui-express'
 import packageJson from '../../../package.json'
-import { parsedTags } from './infer_tags'
+import { parsedPaths, parsedTags } from './inferApiData'
 
 const basePath = '/v2'
 const host = `${packageJson?.host}`
+const paths: unknown = Object.assign({}, ...parsedPaths)
 const tags = parsedTags
 const termsOfService = ''
 
@@ -29,7 +30,8 @@ const openApi: JsonObject = {
     'https',
     'http'
   ],
-  'paths': {
+  'paths': paths,
+  /* 'paths': {
     '/pet/{petId}/uploadImage': {
       'post': {
         'tags': [
@@ -844,7 +846,7 @@ const openApi: JsonObject = {
         }
       }
     }
-  },
+  }, */
   'securityDefinitions': {
     'api_key': {
       'type': 'apiKey',

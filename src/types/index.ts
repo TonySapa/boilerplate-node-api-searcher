@@ -13,3 +13,23 @@ declare module 'express' {
     token?: string
   }
 }
+
+export interface Endpoint {
+  route: string
+  method: 'get' | 'put' | 'post' | 'delete' | 'patch'
+  description: string
+  parameters?: Array<ApiParameterOpenAPI>
+}
+
+export type RouterDescription = {
+  description: string
+  endpoints: Array<Endpoint>
+}
+
+export interface ApiParameterOpenAPI {
+  name: string
+  in?: 'path' | 'query' | 'header' | 'cookie'
+  description?: string
+  required?: boolean
+  type?: 'number' | 'string' | 'file'
+}

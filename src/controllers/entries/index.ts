@@ -9,7 +9,6 @@ import { UserType } from '../../models/user'
 // import { tokenFailed } from '../views/json/users'
 
 const router = express.Router()
-export const routeDescription = 'Demonstration endpoint template about CRUD operations'
 
 declare module 'jsonwebtoken' {
   // eslint-disable-next-line no-unused-vars
@@ -26,7 +25,7 @@ declare module 'express' {
 }
 
 /******************************************************************************
- * Health endpoint to monitor that  the route is working
+ * Health endpoint to monitor that the route is working
  *****************************************************************************/
 router.get('/ping', (_req, res) => {
   res.send('Hello World')
@@ -53,7 +52,7 @@ router.get('/range/:min/:max', async (req, res) => {
   const { min, max } = req.params
   const entries = await EntryModel
     .find({
-      field2: { $gte:  min, $lte: max }
+      field2: { $gte: min, $lte: max }
     })
     .populate('user', { username: 1, name: 1 })
 
