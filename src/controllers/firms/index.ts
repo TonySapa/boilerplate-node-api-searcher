@@ -13,9 +13,10 @@ import {
 } from '../../views/json/firms'
 
 const router = express.Router()
+export const routeDescription = 'Handles CRUD operations regarding accounting firms as model'
 
 /******************************************************************************
- * Global projection. Common on all queries. Fields to include/exclude. See
+ * Global projection. Common to all queries. Fields to include/exclude. See
  * mongodb docs about projection:
  * https://docs.mongodb.com/manual/reference/method/db.collection.find/#std-label-method-find-projection
  *****************************************************************************/

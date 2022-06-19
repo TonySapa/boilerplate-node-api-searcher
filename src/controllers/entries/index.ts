@@ -9,6 +9,7 @@ import { UserType } from '../../models/user'
 // import { tokenFailed } from '../views/json/users'
 
 const router = express.Router()
+export const routeDescription = 'Demonstration endpoint template about CRUD operations'
 
 declare module 'jsonwebtoken' {
   // eslint-disable-next-line no-unused-vars
