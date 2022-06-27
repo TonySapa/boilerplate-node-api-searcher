@@ -8,7 +8,7 @@ import entriesRouter from './controllers/entries'
 import { engine } from 'express-handlebars'
 import { errorHandler } from './middlewares/error_handling'
 import swaggerUi from 'swagger-ui-express'
-import apiDocumentation from './docs/api'
+import apiDocumentation from './__docs__/api'
 
 const app = express()
 app.use(express.json())
@@ -25,9 +25,9 @@ app.get('/ping', (_req, res) => {
   res.send('pong')
 })
 
-app.use('/api/firms', firmsRouter, errorHandler)
-app.use('/api/users', userRouter)
-app.use('/api/entries', entriesRouter, errorHandler)
+app.use('/api/v1/firms', firmsRouter, errorHandler)
+app.use('/api/v1/users', userRouter)
+app.use('/api/v1/entries', entriesRouter, errorHandler)
 
 /******************************************************************************
  * API documentation.

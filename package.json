@@ -58,6 +58,5 @@
     "mongoose-unique-validator": "^3.0.0",
     "node-mailjet": "^3.3.7",
     "swagger-ui-express": "^4.4.0"
-  },
-  "host": "api.tiktax.io"
+  }
 }

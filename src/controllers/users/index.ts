@@ -14,7 +14,7 @@ import jwt from 'jsonwebtoken'
 import { USER_LANGUAGES } from '../../domain'
 
 const router = express.Router()
-export const routeDescription = 'Deals with individual users of the application (not firms)'
+export const routerDescription = 'Deals with individual users of the application (not firms)'
 
 /******************************************************************************
  * Route to monitor health of application

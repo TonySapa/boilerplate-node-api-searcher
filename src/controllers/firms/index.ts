@@ -13,7 +13,7 @@ import {
 } from '../../views/json/firms'
 
 const router = express.Router()
-export const routeDescription = 'Handles CRUD operations regarding accounting firms as model'
+export const routerDescription = 'Handles CRUD operations regarding accounting firms as model'
 
 /******************************************************************************
  * Global projection. Common to all queries. Fields to include/exclude. See

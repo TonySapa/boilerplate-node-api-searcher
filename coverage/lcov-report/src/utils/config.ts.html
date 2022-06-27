@@ -102,7 +102,7 @@ export const MONGODB_URI = process.env.NODE_ENV === 'test'
   : <span class="branch-1 cbranch-no" title="branch not covered" >process.env.NODE_ENV === 'development'</span>
     ? process.env.MONGODB_URI_DEV
     : process.env.MONGODB_URI_PRO
-export const API_URL = process.env.NODE_ENV === 'production'
+export const HOST = process.env.NODE_ENV === 'production'
   ? <span class="branch-0 cbranch-no" title="branch not covered" >'https://www.ticktax.io/api'</span>
   : 'http:localhost:3000/api'
 &nbsp;</pre></td></tr></table></pre>
