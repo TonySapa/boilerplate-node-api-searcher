@@ -11,6 +11,6 @@ export const MONGODB_URI = process.env.NODE_ENV === 'test'
     : process.env.NODE_ENV === 'dev-test'
       ? process.env.MONGODB_URI_TEST
       : process.env.MONGODB_URI_PRO
-export const API_URL = process.env.NODE_ENV === 'production'
-  ? 'https://www.ticktax.io/api'
-  : 'http:localhost:3000/api'
+export const HOST = process.env.NODE_ENV === 'production'
+  ? process.env.HOST
+  : 'localhost:3000/api'

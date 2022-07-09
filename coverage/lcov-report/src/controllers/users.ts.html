@@ -340,7 +340,7 @@ import { UserToSignup } from '../types';
 import { userRegistered, passwordTooShort, languageUnspecified, invalidConfirmationLink, loginFailed } from '../views/json/users';
 import { validatePassword } from './users_handlers';
 import { sendEmail } from '../utils/emails/send';
-import { API_URL } from '../utils/config';
+import { HOST } from '../utils/config';
 import jwt from 'jsonwebtoken';
 import { USER_LANGUAGES } from '../domain';
 // import { typesOfAccountStatus } from '../business_logic/index';
@@ -389,7 +389,7 @@ router.post('/signup', <span class="fstat-no" title="function not covered" >asyn
     };
 &nbsp;
     const emailVars = <span class="cstat-no" title="statement not covered" >{</span>
-      signup_confirmation_url: `${API_URL}/users/signup/${account_status_token}`
+      signup_confirmation_url: `${HOST}/users/signup/${account_status_token}`
     };
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return sendEmail(emailConfig, emailVars)</span>

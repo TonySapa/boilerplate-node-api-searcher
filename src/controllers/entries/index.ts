@@ -25,7 +25,7 @@ declare module 'express' {
 }
 
 /******************************************************************************
- * Health endpoint to monitor that  the route is working
+ * Health endpoint to monitor that the route is working
  *****************************************************************************/
 router.get('/ping', (_req, res) => {
   res.send('Hello World')
@@ -52,7 +52,7 @@ router.get('/range/:min/:max', async (req, res) => {
   const { min, max } = req.params
   const entries = await EntryModel
     .find({
-      field2: { $gte:  min, $lte: max }
+      field2: { $gte: min, $lte: max }
     })
     .populate('user', { username: 1, name: 1 })
 
