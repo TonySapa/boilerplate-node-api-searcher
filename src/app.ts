@@ -8,7 +8,7 @@ import entriesRouter from './controllers/entries'
 import { engine } from 'express-handlebars'
 import { errorHandler } from './middlewares/error_handling'
 import swaggerUi from 'swagger-ui-express'
-import apiDocumentation from './__docs__/api'
+import apiDocumentation from './__docs__/api/index.json'
 
 const app = express()
 app.use(express.json())
